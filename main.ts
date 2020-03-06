@@ -1,3 +1,8 @@
+function pokazi () {
+    basic.showString(pin)
+    basic.showNumber(desetisko)
+    pin = ""
+}
 input.onPinPressed(TouchPin.P1, function () {
     radio.sendNumber(2)
 })
@@ -10,13 +15,12 @@ input.onButtonPressed(Button.AB, function () {
     basic.showIcon(IconNames.No)
 })
 input.onButtonPressed(Button.B, function () {
-    if (pin.length == 4) {
-        basic.showString(pin)
-        basic.showNumber(desetisko)
-        pin = ""
-    } else {
+    if (pin.length < 4) {
         pin = "" + pin + "1"
         desetisko = desetisko * 2 + 1
+    }
+    if (pin.length == 4) {
+        pokazi()
     }
 })
 input.onPinPressed(TouchPin.P2, function () {
@@ -40,13 +44,12 @@ radio.onReceivedNumber(function (prejeto) {
     }
 })
 input.onButtonPressed(Button.A, function () {
-    if (pin.length == 4) {
-        basic.showString(pin)
-        basic.showNumber(desetisko)
-        pin = ""
-    } else {
+    if (pin.length < 4) {
         pin = "" + pin + "0"
         desetisko = desetisko * 2
+    }
+    if (pin.length == 4) {
+        pokazi()
     }
 })
 let crke: string[] = []
